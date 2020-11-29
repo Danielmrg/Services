@@ -1,0 +1,38 @@
+{% extends 'dashboard/main.html' %}
+{% block body %}
+    {% include "dashboard/searchbox.html" %}      
+    <div class="row wow fadeIn">
+      {% if messages %}
+        <div class="container">
+          <div class="card mb-4 wow fadeIn">
+              <div class="card-body mx-auto">
+                {% for message in messages %}
+                  <h6 class="card-title btn btn-info ">{{message}}</h6>
+                {% endfor %}
+              </div>
+          </div>
+        </div> 
+      {% endif %}
+      {% if Requests %}
+          {% for Request in Requests %}
+          <div class="col-md-6 mb-4">
+              <div class="card">
+                  <div class="card-header">{{Request.title}}</div>
+                  <div class="card-body">
+                      <h5 class="card-title">{{Request.category.title}}</h5>
+                      <p class="card-text">{{Request.description}}</p>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      {% else %}
+          <div class="col">
+              <div class="card">
+                  <div class="card-body mx-auto">
+                      <h2 class="card-title btn btn-info">شما هیچ درخواستی ندارید.</h2>
+                  </div>
+              </div>
+          </div> 
+          {% endif %}
+    </div>
+{% endblock body %}

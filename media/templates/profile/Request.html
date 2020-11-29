@@ -1,0 +1,48 @@
+{% extends 'profile/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block body %}
+<div class="row">
+    <div class="container w-50">
+        <div class="card">
+          <div class="card-body">
+            <form method="POST" dir="rtl">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_title" class="float-right">عنوان:</label>
+                    {{form.title|add_class:"form-control"}}
+                </div>
+                <div class="form-group">
+                    <label for="id_phone" class="float-right">تلفن:</label>
+                    {{form.phone|add_class:"form-control"}}
+                </div>
+                <div class="form-group">
+                    <label for="id_category" class="float-right">دسته بندی:</label>
+                    {{form.category|add_class:"form-control"}}
+                </div>
+                <div class="form-group">
+                    <label for="id_address" class="float-right">ادرس:</label>
+                    {{form.address|add_class:"form-control"}}
+                </div>
+                <div class="form-group">
+                    <label for="id_description" class="float-right">توضیحات:</label>
+                    {{form.description|add_class:"form-control"}}
+                </div>
+                <div class="form-group">
+                    {{form.expert}}
+                    {{form.customer}}
+                </div>
+                <input type="submit" name="submit" class="btn btn-primary" value="درخواست">
+            </form>
+          </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('id_title').placeholder='عنوان'
+    document.getElementById('id_phone').placeholder='تلفن'
+    document.getElementById('id_address').placeholder='ادرس'
+    document.getElementById('id_description').placeholder='توضیحات'
+
+</script>
+{% endblock body %}

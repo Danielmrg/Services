@@ -1,0 +1,66 @@
+{% extends "contrib/main.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block form %}
+<!-- Sign up form -->
+<section class="signup">
+    <div class="container">
+        <div class="signup-content">
+            <div class="signup-form">
+                <h2 class="form-title">ثبت نام</h2>
+                <form method="POST" class="register-form" id="register-form" dir="rtl">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        {{ form.username }}    
+                    </div>
+                    {% if form.username.errors %}
+                    <div class="btn btn-sm-6 btn-warning">
+                        {{ form.username.errors }}
+                    </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <label for="email"><i class="zmdi zmdi-email"></i></label>
+                        {{ form.email }}
+                    </div>
+                    {% if form.email.errors %}
+                    <div class="btn btn-sm-6 btn-warning">
+                        {{ form.email.errors }}
+                    </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <label for="password1"><i class="zmdi zmdi-lock"></i></label>
+                        {{ form.password1 }}
+                    </div>
+                    <div class="form-group">
+                        <label for="password2"><i class="zmdi zmdi-lock-outline"></i></label>
+                        {{ form.password2 }}
+                    </div>
+                    {% if form.password2.errors %}
+                    <div class="btn btn-sm-6 btn-warning">
+                        {{ form.password2.errors }}
+                    </div>
+                    {% endif %}
+                    <div class="form-group form-button">
+                        <input type="submit" name="signup" id="signup" class="form-submit" value="ثبت نام"/>
+                    </div>
+                </form>
+                    
+            </div>
+
+            <div class="signup-image">
+                <figure><img src="{% static 'images/signup-image.jpg' %}" alt="sing up image"></figure>
+                <a href="{% url 'login' %}" class="signup-image-link">قبلا ثبت نام کرده ام</a>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    document.getElementById('id_username').placeholder='نام کاربری'
+    document.getElementById('id_email').placeholder='ادرس ایمیل'
+    document.getElementById('id_password1').placeholder='پسورد'
+    document.getElementById('id_password2').placeholder='تکرار پسورد'
+
+</script>
+
+{% endblock form %}

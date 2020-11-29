@@ -1,0 +1,51 @@
+{% load static %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'home' %}">Coding</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            {% for tag in tags %}
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <small>{{tag.title}}</small>
+              </a> 
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {% for category in tag.category_set.all %}
+                    <a class="dropdown-item" href="{% url 'category' category.id %}">{{category.title}}</a>
+                  {% endfor %}
+              </div>
+            </li>  
+            {% endfor %}
+          </ul>
+
+          <ul class="navbar-nav nav-flex-icons">
+            {% if request.user.is_authenticated %}
+              {% if request.user.customer %}
+                <li class="nav-item">
+                  <a href="{% url 'profile' %}" class="nav-link border border-light rounded waves-effect text-white">حساب کاربری</a>
+                </li>
+              {% elif request.user.expert %}
+                <li class="nav-item">
+                  <a href="{% url 'dashboard' %}" class="nav-link border border-light rounded waves-effect text-white">حساب کاربری</a>
+                </li>
+              {% else %}
+              {% endif %}
+              <li class="nav-item">
+                <a href="{% url 'logout' %}" class="nav-link border border-light rounded waves-effect text-white">خروج</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'signup_customer' %}" class="nav-link border border-light rounded waves-effect text-white">ثبت نام</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'login' %}" class="nav-link border border-light rounded waves-effect text-white">ورود</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+  </header>

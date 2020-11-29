@@ -1,0 +1,53 @@
+{% extends 'profile/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block body %}
+<div class="row wow fadeIn">
+    <div class="container w-50">
+        <div class="card">
+          <div class="card-body">
+            <form method="POST" dir="rtl" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_first_name" class="float-right">نام:</label>
+                    {{form.first_name|add_class:"form-control"}}
+                </div>
+                {% if form.first_name.errors %}
+                <div class="btn btn-sm-6 btn-warning">
+                    {{ form.first_name.errors }}
+                </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="id_last_name" class="float-right">نام خانوادگی:</label>
+                    {{form.last_name|add_class:"form-control"}}
+                </div>
+                {% if form.last_name.errors %}
+                <div class="btn btn-sm-6 btn-warning">
+                    {{ form.last_name.errors }}
+                </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="id_phone" class="float-right">تلفن:</label>
+                    {{form.phone|add_class:"form-control"}}
+                </div>
+                {% if form.phone.errors %}
+                <div class="btn btn-sm-6 btn-warning">
+                    {{ form.phone.errors }}
+                </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="id_email" class="float-right">ایمیل:</label>
+                    {{form.email|add_class:"form-control"}}
+                </div>
+                {% if form.email.errors %}
+                <div class="btn btn-sm-6 btn-warning">
+                    {{ form.email.errors }}
+                </div>
+                {% endif %}
+                <input type="submit" class="btn btn-primary" value="ذخیره" >
+              </form>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
